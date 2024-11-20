@@ -19,7 +19,7 @@ class FirstMessageController extends AbstractController
 
     $envelope = new Envelope(
       $message,
-      [new AmqpStamp('user.create')]
+      [new AmqpStamp('user.update')]
     );
 
     $messageBus->dispatch($envelope);

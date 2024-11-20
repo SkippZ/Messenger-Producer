@@ -11,9 +11,9 @@ framework:
           exchange:
             name: "topic-exchange"
             type: "topic"
-          queues:
-            queue_1:
-              binding_keys: ["user.create"]
+            # queues:
+            #   queue_1:
+            #     binding_keys: ["user.create"]
 
       # failed: 'doctrine://default?queue_name=failed'
       # sync: 'sync://'
