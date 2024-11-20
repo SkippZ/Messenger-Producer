@@ -4,7 +4,8 @@
 
 - nginx
 - php-fpm
-- mariadb
-- node
+- rabbitmq
 
-To start the project run `docker compose up -d` and open `http://localhost:8080`
+To start the project run `docker compose up -d`
+
+To publish a message open `http://localhost:8080`
