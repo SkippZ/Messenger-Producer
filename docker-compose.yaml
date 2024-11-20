@@ -1,6 +1,6 @@
-version: '3.9'
+version: "3.9"
 
-name: 'sym-7'
+name: "sym-7"
 
 services:
   nginx:
@@ -8,11 +8,11 @@ services:
       context: .
       dockerfile: docker/nginx/Dockerfile
     ports:
-      - '8080:80'
+      - "8080:80"
     networks:
       - internal
     volumes:
-      - '.:/var/www/html/'
+      - ".:/var/www/html/"
     depends_on:
       - php
   php:
@@ -22,32 +22,39 @@ services:
     networks:
       - internal
     volumes:
-      - '.:/var/www/html/'
-      - './docker/php/conf.d/xdebug.ini:/usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini'
-      - './docker/php/conf.d/error_reporting.ini:/usr/local/etc/php/conf.d/error_reporting.ini'
+      - ".:/var/www/html/"
+      - "./docker/php/conf.d/xdebug.ini:/usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini"
+      - "./docker/php/conf.d/error_reporting.ini:/usr/local/etc/php/conf.d/error_reporting.ini"
     depends_on:
       - db
     expose:
       - 9000
   db:
-    image: 'mariadb:lts'
+    image: "mariadb:lts"
     networks:
       - internal
     ports:
       - 3306:3306
     environment:
-      MARIADB_ROOT_PASSWORD: 'root'
-      MARIADB_USER: 'user'
-      MARIADB_PASSWORD: 'password'
-      MARIADB_DATABASE: 'public'
+      MARIADB_ROOT_PASSWORD: "root"
+      MARIADB_USER: "user"
+      MARIADB_PASSWORD: "password"
+      MARIADB_DATABASE: "public"
     volumes:
-      - './db/:/var/lib/mysql:Z'
+      - "./db/:/var/lib/mysql:Z"
   node:
-    image: 'node:lts'
+    image: "node:lts"
     working_dir: /home/node/app
     volumes:
       - ./:/home/node/app
     command: npm run watch
+  rabbitmq:
+    image: "rabbitmq:3.8-management"
+    ports:
+      - 15672:15672
+      - 5672:5672
+    networks:
+      - internal
 
 networks:
   internal:
