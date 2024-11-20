@@ -1,6 +1,6 @@
 version: "3.9"
 
-name: "sym-7"
+name: "symfony producer"
 
 services:
   nginx:
